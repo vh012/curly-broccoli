@@ -50,15 +50,35 @@ A full-stack web application for managing and sharing a personal book library. T
 
 ```bash
 cd backend
-docker compose -f deployment/docker-compose.yml up -d   # start Postgres, Elasticsearch, MinIO
-bun install
-bun run src/run.ts
+make dev       # build image & start all services in dev mode (with logs)
 ```
+
+Other useful targets:
+
+```bash
+make run               # start services without rebuilding
+make stop              # stop services and remove volumes
+make watch             # start with Docker Compose watch (hot-reload)
+make logs              # show last 100 lines of logs
+make logs-follow       # follow logs in real time
+make hurl              # run Hurl integration tests
+make test-unit         # run unit tests inside the container
+make build             # build Docker image only
+make help              # list all targets and flags
+```
+
+Flags: `PROFILE=<dev|db|elastic|storage|all>`, `PULL=true`, `NO_CACHE=true`, `ENV_FILE=<file>`
 
 ### Frontend
 
 ```bash
 cd frontend
-npm install
-npm run dev
+make dev       # build image & start in dev mode (with watch)
+```
+
+Other useful targets:
+
+```bash
+make prod              # build and start in production mode
+make build             # build Docker image only
 ```
